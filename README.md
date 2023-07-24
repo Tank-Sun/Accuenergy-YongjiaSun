@@ -21,16 +21,16 @@ Task: Create a web page with the following features:
 ## Features
 
 1. Get current location from browser
-!["the defult page when the app firstly loaded"](https://github.com/Tank-Sun/scheduler/blob/master/docs/default-page.png?raw=true)
+!["Get current location from browser"](https://github.com/Tank-Sun/Accuenergy-YongjiaSun/blob/main/Assets/currentLocation.gif?raw=true)
 
 2. Search a location inside the search bar, show the map with a marker, put it in a table, and also show the time zone and local time
-!["the creat appointment form"](https://github.com/Tank-Sun/scheduler/blob/master/docs/add-appointment.png?raw=true)
+!["Search a location"](https://github.com/Tank-Sun/Accuenergy-YongjiaSun/blob/main/Assets/searchLocation.gif?raw=true)
 
 3. Delete the searched location and their markers
-!["the confirmation page before the appointment is deleted"](https://github.com/Tank-Sun/scheduler/blob/master/docs/delete-appointment.png?raw=true)
+!["Delete the searched location"](https://github.com/Tank-Sun/Accuenergy-YongjiaSun/blob/main/Assets/deleteLocation.gif?raw=true)
 
 4. Display a maximum of 10 records on each page
-!["the page showing after adding and deleting appointments, the remaing number of spots changes accordingly"](https://github.com/Tank-Sun/scheduler/blob/master/docs/after-add&delete-page.png?raw=true)
+!["Pagination"](https://github.com/Tank-Sun/Accuenergy-YongjiaSun/blob/main/Assets/pagination.gif?raw=true)
 
 
 ## Setup
