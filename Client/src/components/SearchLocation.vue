@@ -27,9 +27,7 @@
     try {
       const response = await axios.get(`http://localhost:3000/search?location=${location}`);
 
-      console.log("response:", response.data);
 
-      // latestLocation.value = response.data;
       let locationResult = {
         id: Date.now(),
         locaInfo: response.data,
@@ -44,8 +42,7 @@
   };
 
   const updateLocations = (newLocations) => {
-    locations.value = newLocations; // If locations is a ref
-    // OR this.locations = newLocations; if locations is in data()
+    locations.value = newLocations;
   };
 
 </script>

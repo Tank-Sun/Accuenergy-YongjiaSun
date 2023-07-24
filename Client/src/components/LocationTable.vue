@@ -22,41 +22,41 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, watch } from 'vue';
-import Pagination from './Pagination.vue';
+  import { ref, computed, defineProps, watch } from 'vue';
+  import Pagination from './Pagination.vue';
 
 
-const props = defineProps({
-  locations: Array,
-  'updateLocations': Function
-});
+  const props = defineProps({
+    locations: Array,
+    'updateLocations': Function
+  });
 
-const emit = defineEmits(['update:locations']);
+  const emit = defineEmits(['update:locations']);
 
-let selectedLocations = ref([]);
-let currentPage = ref(1);
-let selectAll = ref(false);
+  let selectedLocations = ref([]);
+  let currentPage = ref(1);
+  let selectAll = ref(false);
 
-const displayedLocations = computed(() => {
-  let start = (currentPage.value - 1) * 10;
-  return props.locations.slice(start, start + 10);
-});
+  const displayedLocations = computed(() => {
+    let start = (currentPage.value - 1) * 10;
+    return props.locations.slice(start, start + 10);
+  });
 
-watch(displayedLocations, () => {
-  selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
-});
+  watch(displayedLocations, () => {
+    selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
+  });
 
 
-const deleteSelectedLocations = () => {
-  const newLocations = props.locations.filter(location => !selectedLocations.value.includes(location));
-  selectedLocations.value = [];
-  selectAll.value = false;
-  
-  emit('update:locations', newLocations); // <-- emit the event here
-};
+  const deleteSelectedLocations = () => {
+    const newLocations = props.locations.filter(location => !selectedLocations.value.includes(location));
+    selectedLocations.value = [];
+    selectAll.value = false;
+    
+    emit('update:locations', newLocations); // <-- emit the event here
+  };
 
-const toggleAll = () => {
-  selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
-};
+  const toggleAll = () => {
+    selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
+  };
 </script>
 

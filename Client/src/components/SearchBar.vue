@@ -9,23 +9,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-let searchInput = ref('');
-let invalid = ref(false);
-let errMsg = ref('');
+  let searchInput = ref('');
+  let invalid = ref(false);
+  let errMsg = ref('');
 
-const searchLocation = () => {
-  invalid.value = false;
-  if (!searchInput.value) {
-    invalid.value = true;
-    errMsg.value = 'Please enter a location.';
-    return;
-  }
-  emit('search', searchInput.value);
-  searchInput.value = '';
-};
+  const searchLocation = () => {
+    invalid.value = false;
+    if (!searchInput.value) {
+      invalid.value = true;
+      errMsg.value = 'Please enter a location.';
+      return;
+    }
+    emit('search', searchInput.value);
+    searchInput.value = '';
+  };
 
-const emit = defineEmits(["search"]);
+  const emit = defineEmits(["search"]);
 
 </script>

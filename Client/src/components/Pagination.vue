@@ -7,29 +7,29 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits } from 'vue';
+  import { ref, computed, defineProps, defineEmits } from 'vue';
 
-const props = defineProps({
-  perPage: Number,
-  totalItems: Number,
-});
+  const props = defineProps({
+    perPage: Number,
+    totalItems: Number,
+  });
 
-const currentPage = ref(1);
-const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage));
+  const currentPage = ref(1);
+  const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage));
 
-const prevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--;
-    emit('update:page', currentPage.value);
-  }
-};
+  const prevPage = () => {
+    if (currentPage.value > 1) {
+      currentPage.value--;
+      emit('update:page', currentPage.value);
+    }
+  };
 
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++;
-    emit('update:page', currentPage.value);
-  }
-};
+  const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+      currentPage.value++;
+      emit('update:page', currentPage.value);
+    }
+  };
 
-const emit = defineEmits(['update:page']);
+  const emit = defineEmits(['update:page']);
 </script>

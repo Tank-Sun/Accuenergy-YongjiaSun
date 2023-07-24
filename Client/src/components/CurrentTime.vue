@@ -8,15 +8,15 @@
 
 <script setup>
 
-const props = defineProps({
-  location: Object
-});
+  const props = defineProps({
+    location: Object
+  });
 
-const getLocalTime = (timeZone) => {
-  const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const localTime = new Date(utc + (1000 * timeZone.rawOffset) + (1000 * timeZone.dstOffset));
-  return localTime.toLocaleString();
-};
+  const getLocalTime = (timeZone) => {
+    const now = new Date();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const localTime = new Date(utc + (1000 * timeZone.rawOffset) + (1000 * timeZone.dstOffset));
+    return localTime.toLocaleString();
+  };
 </script>
 
