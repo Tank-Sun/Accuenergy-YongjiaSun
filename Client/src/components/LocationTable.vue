@@ -1,6 +1,6 @@
 <template>
-  <div className="w-[20%] flex flex-col items-center">
-    <button className="bg-red-700 hover:bg-red-800 text-white py-2 px-3 mx-2 mb-3 rounded-lg text-center font-bold cursor-pointer" @click="deleteSelectedLocations">Delete</button>
+  <div className="w-[80%] lg:w-[20%] flex flex-col items-center lg:ml-10">
+    <button className="bg-red-700 hover:bg-red-800 text-white py-2 px-3 mx-2 mt-8 mb-2 md:mb-3 rounded-lg text-center font-bold cursor-pointer" @click="deleteSelectedLocations">Delete</button>
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
       <table className="w-full text-sm text-center">
         <thead className="text-xs text-gray-700 uppercase">

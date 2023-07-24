@@ -1,5 +1,5 @@
 <template>
-  <div className="mt-3 w-[80%] flex justify-around">
+  <div className="mt-3 mb-4 w-[80%] flex justify-around">
     <button @click="prevPage" :disabled="currentPage === 1"><font-awesome-icon :icon="['fas', 'chevron-left']" /> Prev</button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
     <button @click="nextPage" :disabled="currentPage === totalPages">Next <font-awesome-icon :icon="['fas', 'chevron-right']" /></button>

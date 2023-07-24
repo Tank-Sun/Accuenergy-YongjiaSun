@@ -2,7 +2,7 @@
   <div className="flex flex-col items-center w-full">
     <SearchBar @search="searchLocation" />
     <CurrentTime :location="latestLocation" />
-    <div className="flex w-full justify-around mt-20">
+    <div className="flex flex-col items-center lg:flex-row w-full justify-center mt-10 md:mt-20">
       <MapDisplay :locations="locations" :latestLocation="latestLocation" />
       <LocationTable :locations="locations" @update:locations="updateLocations" />
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div className="w-[50%] h-[28rem] rounded-2xl" ref="mapContainer"></div>
+  <div className="w-[80%] h-[24rem] md:h-[26rem] lg:w-[30%] lg:h-[30rem] rounded-2xl lg:mr-10" ref="mapContainer"></div>
 </template>
 
 <script setup>

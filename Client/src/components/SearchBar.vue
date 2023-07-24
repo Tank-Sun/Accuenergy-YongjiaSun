@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
-      <input className="rounded-lg border-2 border-indigo-200 focus:outline-none focus:border-indigo-500 p-3 w-80 mx-4 mt-4" v-model="searchInput" type="text" placeholder="Enter a location" @keyup.enter="searchLocation">
-      <button className="bg-blue-700 text-white py-2 px-3 mx-2 rounded-lg text-center font-bold shadow-lg shadow-gray-400 cursor-pointer hover:scale-105 ease-in duration-100" @click="searchLocation">Search</button>
+    <div className="flex flex-col md:flex-row items-center">
+      <input className="rounded-lg border-2 border-indigo-200 focus:outline-none focus:border-indigo-500 p-3 w-60 md:w-80 mx-4 mt-4 md:my-4" v-model="searchInput" type="text" placeholder="Enter a location" @keyup.enter="searchLocation">
+      <button className="bg-blue-700 text-white py-2 px-3 mx-2 my-2 w-24 rounded-lg text-center font-bold shadow-lg shadow-gray-400 cursor-pointer hover:scale-105 ease-in duration-100" @click="searchLocation">Search</button>
     </div>
     <p className="text-sm text-red-600 self-start ml-6" v-if="invalid">{{ errMsg }}</p>
   </div>
