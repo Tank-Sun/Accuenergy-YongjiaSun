@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <p v-if="location">The current time at {{ location }} is {{ currentTime }}</p>
+  <div v-if="location">
+    <h2>Searched Result: {{location.place.formatted_address}}</h2>
+    <h3>Time Zone: {{location.timeZone.timeZoneName}}</h3>
+    <p>Local Current Time: {{getLocalTime(location.timeZone)}}</p>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import axios from 'axios';
+import { ref } from 'vue';
 
-let location = ref(props.location);
-let currentTime = ref('');
+const props = defineProps({
+  location: Object
+});
 
-watch(() => props.location, (newLocation) => {
-  location.value = newLocation;
-  // Fetch the current time for this location from your server or a third-party API
-  axios.get(`/time?location=${newLocation}`)
-  .then(response => {
-    currentTime.value = response.data.time;
-  });
-}, { immediate: true });
+const getLocalTime = (timeZone) => {
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const localTime = new Date(utc + (1000 * timeZone.rawOffset) + (1000 * timeZone.dstOffset));
+  return localTime.toLocaleString();
+};
 </script>
+

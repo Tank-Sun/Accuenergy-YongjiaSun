@@ -1,12 +1,7 @@
 <template>
   <div>
     <SearchBar @search="searchLocation" />
-    <div v-if="latestLocation">
-      <h2>Searched Result: {{latestLocation.place.formatted_address}}</h2>
-      <h3>Time Zone: {{latestLocation.timeZone.timeZoneName}}</h3>
-      <p>Local Current Time: {{getLocalTime(latestLocation.timeZone)}}</p>
-    </div>
-
+    <CurrentTime :location="latestLocation" />
   </div>
 </template>
 
@@ -14,16 +9,11 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import SearchBar from './SearchBar.vue';
+import CurrentTime from './CurrentTime.vue';
 
 
 const locations = ref([]); // array of locations
 const latestLocation = ref(null);
-const getLocalTime = (timeZone) => {
-  const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const localTime = new Date(utc + (1000 * timeZone.rawOffset) + (1000 * timeZone.dstOffset));
-  return localTime.toLocaleString();
-};
 
 
 // Called when a location is searched in the SearchLocation component
