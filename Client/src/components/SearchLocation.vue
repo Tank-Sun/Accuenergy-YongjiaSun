@@ -2,7 +2,8 @@
   <div>
     <SearchBar @search="searchLocation" />
     <CurrentTime :location="latestLocation" />
-    <MapDisplay :location="latestLocation" />
+    <MapDisplay :locations="locations" :latestLocation="latestLocation" />
+    <LocationTable v-model:locations="locations" />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import axios from 'axios';
 import SearchBar from './SearchBar.vue';
 import CurrentTime from './CurrentTime.vue';
 import MapDisplay from './MapDisplay.vue';
+import LocationTable from './LocationTable.vue';
 
 
 const locations = ref([]); // array of locations
@@ -25,9 +27,14 @@ const searchLocation = async (location) => {
 
     console.log("response:", response.data);
 
-    latestLocation.value = response.data;
-    const locationResult = response.data.place;
-    locations.value.push(locationResult);
+    // latestLocation.value = response.data;
+    let locationResult = {
+      id: Date.now(),
+      locaInfo: response.data,
+    };
+    latestLocation.value = locationResult;
+    locations.value = [...locations.value, locationResult];
+    console.log("locations:", locations.value);
 
   } catch (error) {
     console.error(`Error searching for location "${location}": ${error}`);

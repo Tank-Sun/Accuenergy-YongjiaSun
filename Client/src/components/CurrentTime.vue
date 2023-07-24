@@ -1,13 +1,12 @@
 <template>
   <div v-if="location">
-    <h2>Searched Result: {{location.place.formatted_address}}</h2>
-    <h3>Time Zone: {{location.timeZone.timeZoneName}}</h3>
-    <p>Local Current Time: {{getLocalTime(location.timeZone)}}</p>
+    <h2>Searched Result: {{location.locaInfo.place.formatted_address}}</h2>
+    <h3>Time Zone: {{location.locaInfo.timeZone.timeZoneName}}</h3>
+    <p>Local Current Time: {{getLocalTime(location.locaInfo.timeZone)}}</p>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 
 const props = defineProps({
   location: Object

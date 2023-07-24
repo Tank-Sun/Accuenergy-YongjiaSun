@@ -3,16 +3,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, defineProps } from 'vue';
 import { Loader } from '@googlemaps/js-api-loader';
 
 const props = defineProps({
-  location: Object,
+  locations: Array,
+  latestLocation: Object,
 });
 
 let map;
-const mapContainer = ref(null);
-
+let mapContainer = ref(null);
+let markers = ref({});
+// let markers = reactive({});
 
 onMounted(async () => {
   const loader = new Loader({
@@ -26,10 +28,14 @@ onMounted(async () => {
 
     // Initialize the map
     map = new google.maps.Map(mapContainer.value, {
-      center: { lat: 43.748329, lng: -79.289200 },
+      center: { lat: 40.7128, lng: -74.0060 },
       zoom: 8,
     });
 
+    // Create markers for existing locations
+    for (let location of props.locations) {
+      addMarker(location);
+    }
 
   } catch (error) {
     // Handle the error
@@ -37,21 +43,67 @@ onMounted(async () => {
   }
 });
 
-// Watch for changes in props.location and update the map and marker accordingly
-watch(() => props.location, (newLocation) => {
-  if (newLocation) {
-    console.log("newLocation:", newLocation);
+watch(() => props.locations, (newLocations, oldLocations) => {
+  const newIds = newLocations.map(loc => loc.id);
+  const oldIds = oldLocations.map(loc => loc.id);
 
-    // Update map center
-    map.setCenter(newLocation.place.geometry.location);
-
-    // Add a new marker for the updated location
-    new google.maps.Marker({
-      position: newLocation.place.geometry.location,
-      map,
-    });
+  for (let location of oldLocations) {
+    if (!newIds.includes(location.id)) {
+      console.log("ccccclocation:", location);
+      removeMarker(location);
+    }
   }
-}, { immediate: true });
+
+  for (let location of newLocations) {
+    if (!oldIds.includes(location.id)) {
+      console.log("aaaaalocation:", location);
+      addMarker(location);
+    }
+  }
+}, {deep: true});
+
+watch(() => props.latestLocation, (newLocation) => {
+  if(newLocation){
+    console.log("bbbbbnewLocation:", newLocation);
+    // Update map center
+    map.setCenter(newLocation.locaInfo.place.geometry.location);
+
+    // Add marker for new location
+    addMarker(newLocation);
+  }
+}, {deep: true});
+
+const addMarker = (location) => {
+  let marker = new google.maps.Marker({
+    position: location.locaInfo.place.geometry.location,
+    map,
+  });
+  markers.value[location.id] = marker;
+}
+
+const removeMarker = (location) => {
+  let marker = markers.value[location.id];
+  if (marker) {
+    marker.setMap(null);
+    delete markers.value[location.id];
+  }
+}
+
+// const addMarker = (location) => {
+//   let marker = new google.maps.Marker({
+//     position: location.locaInfo.place.geometry.location,
+//     map,
+//   });
+//   markers[location.id] = marker;
+// }
+
+// const removeMarker = (location) => {
+//   let marker = markers[location.id];
+//   if (marker) {
+//     marker.setMap(null);
+//     delete markers[location.id];
+//   }
+// }
 
 </script>
 
@@ -61,4 +113,11 @@ div {
   width: 100%;
 }
 </style>
+
+
+
+
+
+
+
 
