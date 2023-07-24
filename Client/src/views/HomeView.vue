@@ -4,7 +4,7 @@ import SearchLocation from '../components/SearchLocation.vue';
 </script>
 
 <template>
-  <main>
+  <main className="flex flex-col items-center">
     <CurrentLocation />
     <SearchLocation />
   </main>

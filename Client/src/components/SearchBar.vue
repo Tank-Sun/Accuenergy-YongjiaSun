@@ -1,7 +1,10 @@
 <template>
   <div>
-    <input v-model="searchInput" type="text" placeholder="Enter a location" @keyup.enter="searchLocation">
-    <button @click="searchLocation">Search</button>
+    <div>
+      <input className="rounded-lg border-2 border-indigo-200 focus:outline-none focus:border-indigo-500 p-3 w-80 mx-4 mt-4" v-model="searchInput" type="text" placeholder="Enter a location" @keyup.enter="searchLocation">
+      <button className="bg-blue-700 text-white py-2 px-3 mx-2 rounded-lg text-center font-bold shadow-lg shadow-gray-400 cursor-pointer hover:scale-105 ease-in duration-100" @click="searchLocation">Search</button>
+    </div>
+    <p className="text-sm text-red-600 self-start ml-6" v-if="invalid">{{ errMsg }}</p>
   </div>
 </template>
 
@@ -9,8 +12,16 @@
 import { ref } from 'vue';
 
 let searchInput = ref('');
+let invalid = ref(false);
+let errMsg = ref('');
 
 const searchLocation = () => {
+  invalid.value = false;
+  if (!searchInput.value) {
+    invalid.value = true;
+    errMsg.value = 'Please enter a location.';
+    return;
+  }
   emit('search', searchInput.value);
   searchInput.value = '';
 };

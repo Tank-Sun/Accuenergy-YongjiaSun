@@ -1,8 +1,8 @@
 <template>
-  <div class="pagination">
-    <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
+  <div className="mt-3 w-[80%] flex justify-around">
+    <button @click="prevPage" :disabled="currentPage === 1"><font-awesome-icon :icon="['fas', 'chevron-left']" /> Prev</button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+    <button @click="nextPage" :disabled="currentPage === totalPages">Next <font-awesome-icon :icon="['fas', 'chevron-right']" /></button>
   </div>
 </template>
 

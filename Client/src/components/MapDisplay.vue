@@ -1,5 +1,5 @@
 <template>
-  <div ref="mapContainer"></div>
+  <div className="w-[50%] h-[28rem] rounded-2xl" ref="mapContainer"></div>
 </template>
 
 <script setup>
@@ -79,19 +79,14 @@ const addMarker = (location) => {
 const removeMarker = (location) => {
   let marker = markers.value[location.id];
 
-  // marker.setMap(null)
+  // marker.setMap(null);
+  // marker = null;
   marker.setVisible(false);
   delete markers.value[location.id];
 }
 
 </script>
 
-<style scoped>
-div {
-  height: 400px;
-  width: 100%;
-}
-</style>
 
 
 

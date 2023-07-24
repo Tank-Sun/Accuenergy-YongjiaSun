@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <button class="btn btn-primary" @click="getCurrentLocation">Get Current Location</button>
-    <p v-if="address">{{address}}</p>
-    <p v-else-if="error">{{ error }}</p>
+  <div className="flex flex-col items-center my-20 mx-4">
+    <div className="my-8">
+      <button className='py-3 px-4 rounded-xl uppercase bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl dark:focus:ring-green-800 text-gray-800 font-semibold text-lg mt-2 md:mt-4' @click="getCurrentLocation">Get Your Current Location</button>
+    </div>
+    <p className="text-2xl" v-if="address">{{address}}</p>
+    <p className="text-sm text-red-600" v-else-if="error">{{ error }}</p>
   </div>
 </template>
 
@@ -59,14 +61,3 @@ import axios from 'axios';
     };
 
 </script>
-
-<style scoped>
-.btn {
-  background-color: #0099ff;
-  color: white;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-</style>

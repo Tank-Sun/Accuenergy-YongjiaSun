@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <button @click="deleteSelectedLocations">Delete Selected</button>
-    <table>
-      <thead>
-        <tr>
-          <th><input type="checkbox" v-model="selectAll" @change="toggleAll" /></th>
-          <th>Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="location in displayedLocations" :key="location.id">
-          <td><input type="checkbox" v-model="selectedLocations" :value="location" /></td>
-          <td>{{ location.locaInfo.place.formatted_address }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div className="w-[20%] flex flex-col items-center">
+    <button className="bg-red-700 hover:bg-red-800 text-white py-2 px-3 mx-2 mb-3 rounded-lg text-center font-bold cursor-pointer" @click="deleteSelectedLocations">Delete</button>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+      <table className="w-full text-sm text-center">
+        <thead className="text-xs text-gray-700 uppercase">
+          <tr>
+            <th scope="col" className="px-6 py-3"><input type="checkbox" v-model="selectAll" @change="toggleAll" /> Select All</th>
+            <th scope="col" className="px-6 py-3 bg-gray-50">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b border-gray-200" v-for="location in displayedLocations" :key="location.id">
+            <td className="px-6 py-4"><input type="checkbox" v-model="selectedLocations" :value="location" /></td>
+            <td className="px-6 py-4 bg-gray-50">{{ location.locaInfo.place.formatted_address }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <Pagination :perPage="10" :totalItems="locations.length" @update:page="currentPage = $event" />
   </div>
 </template>

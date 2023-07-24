@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div className="flex flex-col items-center w-full">
     <SearchBar @search="searchLocation" />
     <CurrentTime :location="latestLocation" />
-    <MapDisplay :locations="locations" :latestLocation="latestLocation" />
-    <LocationTable :locations="locations" @update:locations="updateLocations" />
+    <div className="flex w-full justify-around mt-20">
+      <MapDisplay :locations="locations" :latestLocation="latestLocation" />
+      <LocationTable :locations="locations" @update:locations="updateLocations" />
+    </div>
   </div>
 </template>
 
