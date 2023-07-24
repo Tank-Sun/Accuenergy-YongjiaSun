@@ -14,7 +14,7 @@ const props = defineProps({
 let map;
 let mapContainer = ref(null);
 let markers = ref({});
-// let markers = reactive({});
+
 
 onMounted(async () => {
   const loader = new Loader({
@@ -32,10 +32,10 @@ onMounted(async () => {
       zoom: 8,
     });
 
-    // Create markers for existing locations
-    for (let location of props.locations) {
-      addMarker(location);
-    }
+    // // Create markers for existing locations
+    // for (let location of props.locations) {
+    //   addMarker(location);
+    // }
 
   } catch (error) {
     // Handle the error
@@ -49,14 +49,12 @@ watch(() => props.locations, (newLocations, oldLocations) => {
 
   for (let location of oldLocations) {
     if (!newIds.includes(location.id)) {
-      console.log("ccccclocation:", location);
       removeMarker(location);
     }
   }
 
   for (let location of newLocations) {
     if (!oldIds.includes(location.id)) {
-      console.log("aaaaalocation:", location);
       addMarker(location);
     }
   }
@@ -64,14 +62,11 @@ watch(() => props.locations, (newLocations, oldLocations) => {
 
 watch(() => props.latestLocation, (newLocation) => {
   if(newLocation){
-    console.log("bbbbbnewLocation:", newLocation);
     // Update map center
     map.setCenter(newLocation.locaInfo.place.geometry.location);
-
-    // Add marker for new location
-    addMarker(newLocation);
   }
 }, {deep: true});
+
 
 const addMarker = (location) => {
   let marker = new google.maps.Marker({
@@ -83,27 +78,11 @@ const addMarker = (location) => {
 
 const removeMarker = (location) => {
   let marker = markers.value[location.id];
-  if (marker) {
-    marker.setMap(null);
-    delete markers.value[location.id];
-  }
+
+  // marker.setMap(null)
+  marker.setVisible(false);
+  delete markers.value[location.id];
 }
-
-// const addMarker = (location) => {
-//   let marker = new google.maps.Marker({
-//     position: location.locaInfo.place.geometry.location,
-//     map,
-//   });
-//   markers[location.id] = marker;
-// }
-
-// const removeMarker = (location) => {
-//   let marker = markers[location.id];
-//   if (marker) {
-//     marker.setMap(null);
-//     delete markers[location.id];
-//   }
-// }
 
 </script>
 

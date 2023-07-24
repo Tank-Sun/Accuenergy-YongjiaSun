@@ -23,9 +23,13 @@
 import { ref, computed, defineProps, watch } from 'vue';
 import Pagination from './Pagination.vue';
 
+
 const props = defineProps({
   locations: Array,
+  'updateLocations': Function
 });
+
+const emit = defineEmits(['update:locations']);
 
 let selectedLocations = ref([]);
 let currentPage = ref(1);
@@ -40,15 +44,13 @@ watch(displayedLocations, () => {
   selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
 });
 
+
 const deleteSelectedLocations = () => {
-  for (let location of selectedLocations.value) {
-    let index = props.locations.indexOf(location);
-    if (index !== -1) {
-      props.locations.splice(index, 1);
-    }
-  }
+  const newLocations = props.locations.filter(location => !selectedLocations.value.includes(location));
   selectedLocations.value = [];
   selectAll.value = false;
+  
+  emit('update:locations', newLocations); // <-- emit the event here
 };
 
 const toggleAll = () => {
