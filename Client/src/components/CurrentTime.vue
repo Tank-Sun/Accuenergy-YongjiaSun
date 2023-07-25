@@ -12,6 +12,7 @@
     location: Object
   });
 
+  // Calculate the local time based on the time zone
   const getLocalTime = (timeZone) => {
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);

@@ -15,6 +15,7 @@
   let invalid = ref(false);
   let errMsg = ref('');
 
+  //  emit the search event to the parent component, check if the input is empty
   const searchLocation = () => {
     invalid.value = false;
     if (!searchInput.value) {

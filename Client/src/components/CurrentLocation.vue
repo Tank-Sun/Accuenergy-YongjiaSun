@@ -15,7 +15,7 @@
   const address = ref('');
   const error = ref('');
 
-
+  // Get the coordinates of the current location using HTML geolocation API, pass them to the geocodePosition function
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -27,6 +27,7 @@
     }
   };
 
+  // Send the coordinates back to the server, get the address back using the Google Map API
   const geocodePosition = async (position) => {
     try {
       const response = await axios.post(

@@ -16,6 +16,7 @@
   let markers = ref({});
 
 
+  // Load the Google Maps JavaScript API
   onMounted(async () => {
     const loader = new Loader({
       apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -43,6 +44,7 @@
     }
   });
 
+  // Add or remove markers when the locations array changes
   watch(() => props.locations, (newLocations, oldLocations) => {
     const newIds = newLocations.map(loc => loc.id);
     const oldIds = oldLocations.map(loc => loc.id);
@@ -60,9 +62,9 @@
     }
   }, {deep: true});
 
+  // Update map center
   watch(() => props.latestLocation, (newLocation) => {
     if(newLocation){
-      // Update map center
       map.setCenter(newLocation.locaInfo.place.geometry.location);
     }
   }, {deep: true});
@@ -79,6 +81,7 @@
   const removeMarker = (location) => {
     let marker = markers.value[location.id];
 
+    // Seems like marker.setMap(null) doesn't work correctly
     // marker.setMap(null);
     // marker = null;
     marker.setVisible(false);

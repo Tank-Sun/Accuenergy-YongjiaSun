@@ -17,6 +17,7 @@
   const currentPage = ref(1);
   const totalPages = computed(() => Math.ceil(props.totalItems / props.perPage));
 
+  // Emit the updated page number to the parent component
   const prevPage = () => {
     if (currentPage.value > 1) {
       currentPage.value--;

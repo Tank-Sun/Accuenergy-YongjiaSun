@@ -37,24 +37,28 @@
   let currentPage = ref(1);
   let selectAll = ref(false);
 
+  // Display 10 locations per page
   const displayedLocations = computed(() => {
     let start = (currentPage.value - 1) * 10;
     return props.locations.slice(start, start + 10);
   });
 
+  // Update the selectedLocations array when the displayedLocations array changes
   watch(displayedLocations, () => {
     selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
   });
 
 
+  // Delete the selected locations from the locations array, emit the updated locations array to the parent component
   const deleteSelectedLocations = () => {
     const newLocations = props.locations.filter(location => !selectedLocations.value.includes(location));
     selectedLocations.value = [];
     selectAll.value = false;
     
-    emit('update:locations', newLocations); // <-- emit the event here
+    emit('update:locations', newLocations); 
   };
 
+  // Select all locations
   const toggleAll = () => {
     selectedLocations.value = selectAll.value ? [...displayedLocations.value] : [];
   };

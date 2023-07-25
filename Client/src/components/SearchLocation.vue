@@ -22,7 +22,7 @@
   const latestLocation = ref(null);
 
 
-  // Called when a location is searched in the SearchLocation component
+  // Called when a location is searched in the SearchBar component
   const searchLocation = async (location) => {
     try {
       const response = await axios.get(`http://localhost:3000/search?location=${location}`);
@@ -41,6 +41,7 @@
     }
   };
 
+  // Called when a location is deleted in the LocationTable component, update the locations array
   const updateLocations = (newLocations) => {
     locations.value = newLocations;
   };
