@@ -59,6 +59,7 @@ Frontend:
 - @fortawesome/vue-fontawesome
 - tailwindcss
 - vite
+- uuid
 
 <br>
 <br>
